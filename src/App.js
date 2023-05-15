@@ -45,6 +45,9 @@ const App = () => {
 
   return (
     <div className="container-fluid bg-dark text-light py-5">
+      <a href="https://mario-velasquez.web.app/" target={'_blank'}>
+        <img src="favicon.png" alt="mv" className="centered-img" width={ 100 } height={ 100 }></img>
+      </a>
       <h1 className="text-center mb-4">Publicaciones</h1>
       <input
         type="text"
