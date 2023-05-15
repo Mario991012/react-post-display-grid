@@ -45,6 +45,9 @@ const App = () => {
 
   return (
     <div className="container-fluid bg-dark text-light py-5">
+      <a href="https://mario-velasquez.web.app/" target={'_blank'}>
+        <img src="favicon.png" alt="mv" className="centered-img" width={ 100 } height={ 100 }></img>
+      </a>
       <h1 className="text-center mb-4">Publicaciones</h1>
       <input
         type="text"
@@ -63,7 +66,7 @@ const App = () => {
       </select>
       <div className="row">
         { filteredPosts.map((post) => (
-          <div className="col-md-4 col-lg-4 col-sm-12 mb-4">
+          <div className="col-md-4 col-lg-4 col-sm-12 mb-4" key={ post.id }>
             <div className="card h-100 bg-dark text-light">
               <div className="card-body">
                 <h5 className="card-title text-warning">{ post.title }</h5>

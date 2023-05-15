@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "React Posts Grid",
+  "name": "React Post Display Grid",
   "icons": [
     {
       "src": "favicon.ico",
