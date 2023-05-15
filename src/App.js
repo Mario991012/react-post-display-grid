@@ -5,6 +5,7 @@ const App = () => {
   const [posts, setPosts] = useState([]);
   const [filter, setFilter] = useState('');
   const [filteredPosts, setFilteredPosts] = useState([]);
+  const [sortOrder, setSortOrder] = useState('asc');
 
   useEffect(() => {
     const getPosts = async () => {
@@ -20,17 +21,26 @@ const App = () => {
     getPosts();
   }, []);
 
-  const onFilterChange = (event) => {
-    const value = event.target.value;
-    setFilter(value);
-
-    const filtered = posts.filter((post) => {
-      return (
-        post.userId.toString().includes(value) || post.title.toLowerCase().includes(value.toLowerCase()) || post.body.toLowerCase().includes(value.toLowerCase())
-      );
-    });
+  useEffect(() => {
+    const filtered = posts
+      .filter((post) => {
+        return (
+          post.userId.toString().includes(filter) ||
+          post.title.toLowerCase().includes(filter.toLowerCase()) ||
+          post.body.toLowerCase().includes(filter.toLowerCase())
+        );
+      })
+      .sort((t1, t2) => {
+        const title1 = t1.title.toLowerCase();
+        const title2 = t2.title.toLowerCase();
+        return sortOrder === 'asc' ? title1.localeCompare( title2 ) : title2.localeCompare( title1 );
+      });
 
     setFilteredPosts(filtered);
+  }, [posts, filter, sortOrder]);
+
+  const onFilterChange = (event) => {
+    setFilter(event.target.value);
   };
 
   return (
@@ -43,6 +53,14 @@ const App = () => {
         value={ filter }
         onChange={ onFilterChange }
       />
+      <select
+        className="form-select mb-4"
+        value={sortOrder}
+        onChange={(e) => setSortOrder(e.target.value)}
+      >
+        <option value="asc">Ordenar por título ascendente</option>
+        <option value="desc">Ordenar por título descendente</option>
+      </select>
       <div className="row">
         { filteredPosts.map((post) => (
           <div className="col-md-4 col-lg-4 col-sm-12 mb-4">
